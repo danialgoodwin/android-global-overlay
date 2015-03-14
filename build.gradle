@@ -8,7 +8,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:1.0.0'
+//        classpath 'com.android.tools.build:gradle:1.1.0'
 
         // Used for publishing library to jCenter
         // More info: https://github.com/bintray/gradle-bintray-plugin

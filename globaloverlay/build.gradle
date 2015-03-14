@@ -64,6 +64,7 @@ dependencies {
 //    }
 //}
 
+// Should there be a link to the res directories also?
 // build a jar with source files
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
