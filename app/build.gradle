@@ -1,3 +1,9 @@
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -22,4 +28,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+
+//    compile 'com.github.danialgoodwin:android-global-overlay:v0.0.1-test'
 }

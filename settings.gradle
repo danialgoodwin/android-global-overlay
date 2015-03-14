@@ -1,1 +1,2 @@
-include ':app', ':globaloverlay'
+include ':app'
+include ':globaloverlay'

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 //apply plugin: 'com.jfrog.bintray'
+apply plugin: 'android-maven'
 
 android {
     compileSdkVersion 22
@@ -21,5 +22,53 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
+//    compile 'com.android.support:appcompat-v7:22.0.0'
+}
+
+
+//bintray {
+//    user = BINTRAY_USER
+//    key = BINTRAY_PRIVATE_API_KEY
+//
+////    configurations = ['deployables'] //When uploading configuration files
+//    // - OR -
+////    publications = ['mavenStuff'] //When uploading Maven-based publication files
+//    // - AND/OR -
+////    filesSpec { //When uploading any arbitrary files ('filesSpec' is a standard Gradle CopySpec)
+////        from 'arbitrary-files'
+////        into 'standalone_files/level1'
+////        rename '(.+)\\.(.+)', '$1-suffix.$2'
+////    }
+//    dryRun = false //Whether to run this as dry-run, without deploying
+//    publish = true //If version should be auto published after an upload
+//    pkg {
+//        repo = 'maven'
+//        name = 'globaloverlay'
+//        desc = 'The simplest way to get a global overlay view in Android!'
+//        websiteUrl = 'https://github.com/danialgoodwin/android-global-overlay'
+//        issueTrackerUrl = 'https://github.com/danialgoodwin/android-global-overlay/issues'
+//        vcsUrl = 'https://github.com/danialgoodwin/android-global-overlay.git'
+//        licenses = ['MIT']
+//        labels = ['android', 'fab']
+//        publicDownloadNumbers = true
+////        attributes= ['a': ['ay1', 'ay2'], 'b': ['bee'], c: 'cee'] //Optional package-level attributes
+//        //Optional version descriptor
+////        version {
+////            name = '1.3-Final' //Bintray logical version name
+////            desc = 'optional, version-specific description'
+////            vcsTag = '1.3.0'
+////            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+//            //Optional version-level attributes
+////        }
+//    }
+//}
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+artifacts {
+    archives sourcesJar
 }
