@@ -30,6 +30,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    
+    compile project(':globaloverlay')
 
     // I've tried both of these, but neither seem to work.
 //    compile 'com.github.danialgoodwin:android-global-overlay:v0.0.3'
