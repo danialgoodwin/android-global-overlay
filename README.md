@@ -8,13 +8,15 @@ Goals:
 2. Looks "good enough".
 
 
-## Features ##
+## Main Features ##
 
-1. Easy, readable implementation
-2. Overlay view dragging
-3. Simple onClick and onRemove listeners
-4. Close view by dragging to an "X" view at the bottom of the screen
-5. Simple demo
+1. Minimal setup
+2. Looks "good enough"
+3. Easy, readable implementation
+4. Overlay view dragging
+5. Simple onClick and onRemove listeners
+6. Close view by dragging to an "X" view at the bottom of the screen
+7. Simple demo
 
 
 
@@ -29,7 +31,7 @@ Goals:
         }
 
         dependencies {
-            compile 'com.github.danialgoodwin:android-global-overlay:v0.2'
+            compile 'com.github.danialgoodwin:android-global-overlay:v0.8'
         }
 
 2. Subclass `GlobalOverlayService` and call `addOverlayView(View)`. Example working code:
@@ -56,7 +58,7 @@ Goals:
 
         }
 
-3. In `AndroidManifest.xml`, add your `Service` and add the required Android permission:
+3. In `AndroidManifest.xml`, add your `Service` and the required Android permission:
 
         <manifest ...>
 
@@ -80,7 +82,7 @@ Done. Most cases won't need to do any more than that. Though there are a few mor
 
 `GlobalOverlayService` will handle everything else, including closing the overlay view when the `Service` is destroyed.
 
-The library `GlobalOverlayService` has a few more features available:
+The library class `GlobalOverlayService` has a few more features available:
 - In the above sample, where the `OnClickListener` is passed in as an argument, there's an overloaded method that also allows an `OnLongClickListener` and `OnOverlayRemoveListener`. (Note: OnLongClickListener isn't implemented yet.)
 - Change what the "remove view" looks like by overriding `onGetRemoveView()`.
 - You can remove the overlay without destroying the `Service` by calling `removeOverlayView(View)` with the same view you used in `addOverlayView(View)`.
@@ -99,6 +101,7 @@ The library `GlobalOverlayService` has a few more features available:
 
 - When the user manually removes the overlay (by dragging to the removeView), the service will be destroyed.
 - Currently, only one floating overlay view is allowed at a time.
+- If overriding `Service.onCreate()`, then make sure to call `super.onCreate()` so that `GlobalOverlayService` can do some required setup.
 
 
 
