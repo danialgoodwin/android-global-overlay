@@ -1,6 +1,6 @@
 .DS_Store
 gradle.properties
-
+asset/
 
 
 # Created by http://www.gitignore.io
