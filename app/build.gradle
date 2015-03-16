@@ -32,6 +32,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
 
     // I've tried both of these, but neither seem to work.
+//    compile 'com.github.danialgoodwin:android-global-overlay:0.1'
+//    compile 'com.github.danialgoodwin:android-global-overlay.globaloverlay:0.1'
+//    compile 'com.github.danialgoodwin:android-global-overlay:0.1'
 //    compile 'com.github.danialgoodwin:android-global-overlay:v0.0.3'
 //    compile 'com.github.danialgoodwin:android-global-overlay.globaloverlay:v0.0.3'
 }
