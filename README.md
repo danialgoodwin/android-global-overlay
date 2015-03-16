@@ -3,6 +3,7 @@
 I went through about 10 other implementations of the global floating overlays and none of them were as modular as I would have liked. So, this is my implementation.
 
 Goals:
+
 1. Minimal setup.
 2. Looks "good enough".
 
@@ -21,59 +22,59 @@ Goals:
 
 1. Set this project as a dependency. In your app module's `build.gradle`, add the following lines:
 
-    repositories {
-        maven {
-            url "https://jitpack.io"
+        repositories {
+            maven {
+                url "https://jitpack.io"
+            }
         }
-    }
 
-    dependencies {
-        compile 'com.github.danialgoodwin:android-global-overlay:v0.2'
-    }
+        dependencies {
+            compile 'com.github.danialgoodwin:android-global-overlay:v0.2'
+        }
 
 2. Subclass `GlobalOverlayService` and call `addOverlayView(View)`. Example working code:
 
-    public class MySimpleOverlayService extends GlobalOverlayService {
+        public class MySimpleOverlayService extends GlobalOverlayService {
 
-        @Override
-        public void onCreate() {
-            super.onCreate();
+            @Override
+            public void onCreate() {
+                super.onCreate();
 
-            ImageView view = new ImageView(this);
-            view.setImageResource(R.mipmap.ic_launcher);
-            addOverlayView(view, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toast("onClick");
-                }
-            });
+                ImageView view = new ImageView(this);
+                view.setImageResource(R.mipmap.ic_launcher);
+                addOverlayView(view, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toast("onClick");
+                    }
+                });
+            }
+
+            private void toast(String message) {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            }
+
         }
-
-        private void toast(String message) {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 3. In `AndroidManifest.xml`, add your `Service` and add the required Android permission:
 
-    <manifest ...>
+        <manifest ...>
 
-        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+            <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
-        <application ...>
-            ...
-            <service android:name=".MySimpleOverlayService"
-                android:exported="false"
-                android:enabled="true" />
-        </application>
-    </manifest>
+            <application ...>
+                ...
+                <service android:name=".MySimpleOverlayService"
+                    android:exported="false"
+                    android:enabled="true" />
+            </application>
+        </manifest>
 
 4. Call `startService()` whenever you want to show the global overlay. For example, in my `MainActivity.java`:
 
-    private void startOverlay() {
-        startService(new Intent(this, MySimpleOverlayService.class));
-    }
+        private void startOverlay() {
+            startService(new Intent(this, MySimpleOverlayService.class));
+        }
 
 Done. Most cases won't need to do any more than that. Though there are a few more methods to support other use cases.
 
