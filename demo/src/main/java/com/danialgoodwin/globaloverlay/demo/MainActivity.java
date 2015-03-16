@@ -1,4 +1,4 @@
-package com.danialgoodwin.globaloverlay;
+package com.danialgoodwin.globaloverlay.demo;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

@@ -1,2 +1,1 @@
-include ':globaloverlay'
-include ':app'
+include ':globaloverlay', ':demo'

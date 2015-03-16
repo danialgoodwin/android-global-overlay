@@ -1,4 +1,4 @@
-package com.danialgoodwin.globaloverlay;
+package com.danialgoodwin.globaloverlay.demo;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
