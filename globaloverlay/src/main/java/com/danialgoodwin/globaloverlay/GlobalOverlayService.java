@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Danial Goodwin (created 2015-03-13)
+ * Copyright (c) 2015 Danial Goodwin (source: https://github.com/danialgoodwin/android-global-overlay) (created 2015-03-13)
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -102,6 +102,15 @@ public abstract class GlobalOverlayService extends Service {
      *
      * @param view the view to overlay across all apps and activities
      * @param onClickListener get notified of a click, set null to ignore
+     */
+    public final void addOverlayView(View view, View.OnClickListener onClickListener) {
+        addOverlayView(view, onClickListener, null, null);
+    }
+
+    /** Add a global floating view.
+     *
+     * @param view the view to overlay across all apps and activities
+     * @param onClickListener get notified of a click, set null to ignore
      * @param onLongClickListener not implemented yet, just set as null
      * @param onRemoveOverlayListener get notified when overlay is removed (not from a destroyed service though)
      */
@@ -119,7 +128,7 @@ public abstract class GlobalOverlayService extends Service {
         mWindowManager.addView(mOverlayView, newWindowManagerLayoutParams());
     }
 
-    /** Manually remove a overlay without destroying the service. */
+    /** Manually remove an overlay without destroying the service. */
     public final void removeOverlayView(View view) {
         removeOverlayView(view, false);
     }
