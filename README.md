@@ -8,6 +8,8 @@ Goals:
 2. Looks "good enough".
 
 
+Here's a quick demo video showing this library in action:
+
 [![demo video](http://img.youtube.com/vi/vL9fGaa1Hrg/0.jpg)](http://www.youtube.com/watch?v=vL9fGaa1Hrg)
 
 
