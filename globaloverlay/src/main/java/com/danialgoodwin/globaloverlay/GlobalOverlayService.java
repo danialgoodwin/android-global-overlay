@@ -211,8 +211,8 @@ public abstract class GlobalOverlayService extends Service {
 
     /** Return true if point (x1,y1) is in the square defined by (x2,y2) with radius, otherwise false.  */
     private boolean isPointInArea(int x1, int y1, int x2, int y2, int radius) {
-        log("isPointInArea(). x1=" + x1 + ",y1=" + y1);
-        log("isPointInArea(). x2=" + x2 + ",y2=" + y2 + ",radius=" + radius);
+//        log("isPointInArea(). x1=" + x1 + ",y1=" + y1);
+//        log("isPointInArea(). x2=" + x2 + ",y2=" + y2 + ",radius=" + radius);
         return x1 >= x2 - radius && x1 <= x2 + radius && y1 >= y2 - radius && y1 <=  y2 + radius;
     }
 
