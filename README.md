@@ -36,23 +36,27 @@ Here's a quick demo video showing this library in action:
         }
 
         dependencies {
-            compile 'com.github.danialgoodwin:android-global-overlay:v0.8'
+            compile 'com.github.danialgoodwin:android-global-overlay:v0.9
         }
 
 2. Subclass `GlobalOverlayService` and call `addOverlayView(View)`. Example working code:
 
-        public class MySimpleOverlayService extends GlobalOverlayService {
+        public class MySimpleOverlayService extends Service {
+
+            private GlobalOverlay mGlobalOverlay;
 
             @Override
             public void onCreate() {
                 super.onCreate();
+                mGlobalOverlay = new GlobalOverlay(this);
 
                 ImageView view = new ImageView(this);
                 view.setImageResource(R.mipmap.ic_launcher);
-                addOverlayView(view, new View.OnClickListener() {
+                mGlobalOverlay.addOverlayView(view, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         toast("onClick");
+                        stopSelf(); // Stop service not needed.
                     }
                 });
             }
@@ -85,11 +89,9 @@ Here's a quick demo video showing this library in action:
 
 Done. Most cases won't need to do any more than that. Though there are a few more methods to support other use cases.
 
-`GlobalOverlayService` will handle everything else, including closing the overlay view when the `Service` is destroyed.
-
-The library class `GlobalOverlayService` has a few more features available:
+The library class `GlobalOverlay` has a few more features available:
 - In the above sample, where the `OnClickListener` is passed in as an argument, there's an overloaded method that also allows an `OnLongClickListener` and `OnOverlayRemoveListener`. (Note: OnLongClickListener isn't implemented yet.)
-- Change what the "remove view" looks like by overriding `onGetRemoveView()`.
+- Change what the "remove view" looks by using the overloaded constructor `GlobalOverlay(Context, View)`.
 - You can remove the overlay without destroying the `Service` by calling `removeOverlayView(View)` with the same view you used in `addOverlayView(View)`.
 - The `OnRemoveOverlayListener.onRemoveOverlay` provides an argument that takes into account whether or not the user is the one to remove the overlay. (I'm using this info for analytics)
 
@@ -104,9 +106,8 @@ The library class `GlobalOverlayService` has a few more features available:
 
 ## Possible Gotchas ##
 
-- When the user manually removes the overlay (by dragging to the removeView), the service will be destroyed.
+- When the user manually removes the overlay (by dragging to the removeView), you would have to manually stop the service is it's not needed anymore.
 - Currently, only one floating overlay view is allowed at a time.
-- If overriding `Service.onCreate()`, then make sure to call `super.onCreate()` so that `GlobalOverlayService` can do some required setup.
 
 
 
@@ -130,10 +131,7 @@ The current implementation is set in `addOverlayView()`, which calls `newSimpleO
 
 ### API Design considerations ###
 
-- For my simple case, I didn't need to bind the service, so `GlobalOverlayService` implements `Service.onBind()` by always returning null.
-- I was thinking about making a `protected abstract View mGlobalOverlayService.onCreateView()` so that implementers didn't have to worry about when to call `addOverlayView()` nor the `Service` lifecycle. But, as a trade-off it would be limiting for those who may not want an overlay for the entire life of the `Service`.
-
-
+The first version of this library extended `Service`. Since v0.9, the main library has been changed to be a regular object that was more versatile with only a few more lines for the API implementer. For a while, the old `GlobalOverlayService` will remain in the repo.
 
 
 
