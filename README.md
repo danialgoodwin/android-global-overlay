@@ -36,7 +36,7 @@ Here's a quick demo video showing this library in action:
         }
 
         dependencies {
-            compile 'com.github.danialgoodwin:android-global-overlay:v0.9
+            compile 'com.github.danialgoodwin:android-global-overlay:v0.9'
         }
 
 2. Create an instance of `GlobalOverlay` and call `addOverlayView(View)`. Example working code:
