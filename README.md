@@ -39,7 +39,7 @@ Here's a quick demo video showing this library in action:
             compile 'com.github.danialgoodwin:android-global-overlay:v0.9
         }
 
-2. Subclass `GlobalOverlayService` and call `addOverlayView(View)`. Example working code:
+2. Create an instance of `GlobalOverlay` and call `addOverlayView(View)`. Example working code:
 
         public class MySimpleOverlayService extends Service {
 
