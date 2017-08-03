@@ -7,6 +7,7 @@ package com.danialgoodwin.globaloverlay;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -186,7 +187,7 @@ public class GlobalOverlay {
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
+                getTypeForWindow(),
 //                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 PixelFormat.TRANSLUCENT);
@@ -195,10 +196,11 @@ public class GlobalOverlay {
     }
 
     private static WindowManager.LayoutParams newWindowManagerLayoutParamsForRemoveView() {
+
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_PHONE,
+                getTypeForWindow(),
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                         WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
                         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
@@ -208,12 +210,20 @@ public class GlobalOverlay {
         return params;
     }
 
+    private static int getTypeForWindow() {
+        int type = WindowManager.LayoutParams.TYPE_PHONE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
+        return type;
+    }
+
     /** Interface definition for when an overlay view has been removed. */
-    public static interface OnRemoveOverlayListener {
+    public interface OnRemoveOverlayListener {
         /** This overlay has been removed.
          * @param v the removed view
          * @param isRemovedByUser true if user manually removed view, false if removed another way */
-        public void onRemoveOverlay(View v, boolean isRemovedByUser);
+        void onRemoveOverlay(View v, boolean isRemovedByUser);
     }
 
 }
